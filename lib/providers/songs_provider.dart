@@ -20,7 +20,7 @@ class SongsProvider with ChangeNotifier {
       audioUrl: 'https://prosearch.tribeofnoise.com/artists/show/42897/22761',
       artist: 'blancey',
       duration: '3:14',
-      isFavorited: false,
+      isFavorited: true,
       isPlaying: false,
     ),
     Song(
@@ -30,7 +30,7 @@ class SongsProvider with ChangeNotifier {
       audioUrl: 'https://prosearch.tribeofnoise.com/artists/show/35255/37110',
       artist: 'derekclegg',
       duration: '3:45',
-      isFavorited: false,
+      isFavorited: true,
       isPlaying: false,
     ),
     Song(
@@ -54,4 +54,8 @@ class SongsProvider with ChangeNotifier {
       isPlaying: false,
     ),
   ];
+
+  List<Song> get favoritedSongs {
+    return songsProviderList.where((song) => song.isFavorited == true).toList();
+  }
 }

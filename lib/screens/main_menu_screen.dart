@@ -5,7 +5,8 @@ import 'package:music_player_app/providers/playlists_provider.dart';
 import 'package:music_player_app/providers/songs_provider.dart';
 import 'package:music_player_app/widgets/main_menu_song_player.dart';
 import 'package:music_player_app/widgets/playlist_card.dart';
-import 'package:music_player_app/widgets/song_list_tile.dart';
+import 'package:music_player_app/widgets/song_list.dart';
+import 'package:music_player_app/widgets/song_list_tile_item.dart';
 import 'package:provider/provider.dart';
 import 'package:music_player_app/models/playlist.dart';
 import '../models/colors.dart' as custom_colors;
@@ -20,6 +21,7 @@ class MainMenuScreen extends StatelessWidget {
             .playlistsProviderList;
     List<Song> songsData =
         Provider.of<SongsProvider>(context, listen: false).songsProviderList;
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: custom_colors.pinkPrimary,
@@ -121,6 +123,7 @@ class MainMenuScreen extends StatelessWidget {
                                       Text(
                                         'Your Playlists',
                                         style: TextStyle(
+                                            height: 1,
                                             fontSize: 16,
                                             color: Colors.white,
                                             fontWeight: FontWeight.bold),
@@ -154,57 +157,10 @@ class MainMenuScreen extends StatelessWidget {
                 ),
               ),
               SizedBox(
-                height: 40,
+                height: 32,
               ),
               Expanded(
-                child: Row(
-                  children: [
-                    Expanded(
-                      flex: 1,
-                      child: Padding(
-                        padding: const EdgeInsets.only(left: 20.0),
-                        child: RotatedBox(
-                          quarterTurns: -1,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: const [
-                              Text(
-                                'Liked',
-                                style: TextStyle(
-                                    fontSize: 16,
-                                    color: Colors.black54,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                              SizedBox(
-                                width: 40,
-                              ),
-                              Text(
-                                'Recent',
-                                style: TextStyle(
-                                    fontSize: 16,
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                    Expanded(
-                      flex: 6,
-                      child: Padding(
-                        padding: EdgeInsets.only(right: 20.0, left: 8),
-                        child: ListView.builder(
-                          itemCount: songsData.length,
-                          itemBuilder: (_, index) {
-                            return SongListTile(songsData[index]);
-                          },
-                        ),
-                      ),
-                    )
-                  ],
-                ),
+                child: SongList(),
               )
             ],
           ),
@@ -217,3 +173,72 @@ class MainMenuScreen extends StatelessWidget {
     );
   }
 }
+
+// class SongList extends StatelessWidget {
+//   const SongList({
+//     Key? key,
+//     required this.songsData,
+//   }) : super(key: key);
+
+//   final List<Song> songsData;
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Row(
+//       children: [
+//         Expanded(
+//           flex: 1,
+//           child: Padding(
+//             padding: const EdgeInsets.only(left: 20.0),
+//             child: RotatedBox(
+//               quarterTurns: -1,
+//               child: Row(
+//                 mainAxisAlignment: MainAxisAlignment.end,
+//                 crossAxisAlignment: CrossAxisAlignment.start,
+//                 children: const [
+//                   Text(
+//                     'Liked',
+//                     style: TextStyle(
+//                         fontSize: 16,
+//                         color: Colors.black54,
+//                         fontWeight: FontWeight.bold),
+//                   ),
+//                   SizedBox(
+//                     width: 40,
+//                   ),
+//                   Text(
+//                     'Recent',
+//                     style: TextStyle(
+//                         fontSize: 16,
+//                         color: Colors.black,
+//                         fontWeight: FontWeight.bold),
+//                   ),
+//                 ],
+//               ),
+//             ),
+//           ),
+//         ),
+//         Expanded(
+//           flex: 6,
+//           child: Padding(
+//             padding: EdgeInsets.only(right: 20.0, left: 8),
+//             child: ListView.builder(
+//               itemCount: songsData.length,
+//               itemBuilder: (_, index) {
+//                 return Column(
+//                   children: [
+//                     SongListTile(songsData[index]),
+//                     SizedBox(
+//                       height:
+//                           index == songsData.length - 1 ? 100 : 0,
+//                     )
+//                   ],
+//                 );
+//               },
+//             ),
+//           ),
+//         )
+//       ],
+//     );
+//   }
+// }
