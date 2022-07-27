@@ -2,10 +2,35 @@ import 'package:flutter/material.dart';
 import 'package:music_player_app/models/song.dart';
 import '../models/colors.dart' as custom_colors;
 
-class MainMenuSongPlayer extends StatelessWidget {
+class MainMenuSongPlayer extends StatefulWidget {
   Song data;
 
   MainMenuSongPlayer(this.data);
+
+  @override
+  State<MainMenuSongPlayer> createState() => _MainMenuSongPlayerState();
+}
+
+class _MainMenuSongPlayerState extends State<MainMenuSongPlayer>
+    with TickerProviderStateMixin {
+  bool musicIsPaused = false;
+  late AnimationController _controller;
+
+  @override
+  void initState() {
+    _controller = AnimationController(
+      duration: const Duration(milliseconds: 5000),
+      vsync: this,
+    );
+    _controller.repeat();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +38,7 @@ class MainMenuSongPlayer extends StatelessWidget {
       padding: EdgeInsets.symmetric(horizontal: 20),
       width: double.infinity,
       height: 80,
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         color: Colors.black,
         borderRadius: BorderRadius.only(
           topLeft: Radius.circular(20),
@@ -26,35 +51,72 @@ class MainMenuSongPlayer extends StatelessWidget {
           leading: CircleAvatar(
             radius: 23,
             backgroundColor: Colors.white,
-            child: CircleAvatar(
-              radius: 22,
-              backgroundImage: NetworkImage(data.coverImageUrl),
+            child: RotationTransition(
+              turns: Tween(begin: 0.0, end: 1.0).animate(_controller),
+              child: CircleAvatar(
+                radius: 22,
+                backgroundImage: NetworkImage(widget.data.coverImageUrl),
+              ),
             ),
           ),
           title: Text(
-            data.title,
+            widget.data.title,
             style: TextStyle(
                 color: Colors.white, fontWeight: FontWeight.bold, fontSize: 16),
           ),
           subtitle: Text(
-            data.artist,
+            widget.data.artist,
             style:
                 TextStyle(fontSize: 14, color: Colors.white.withOpacity(0.7)),
           ),
           trailing: Container(
-            width: 60,
+            width: 64,
             //color: Colors.white,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Icon(
-                  Icons.favorite,
-                  color: custom_colors.pinkPrimary,
+                GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      widget.data.isFavorited = !widget.data.isFavorited;
+                    });
+                  },
+                  child: Icon(
+                    widget.data.isFavorited
+                        ? Icons.favorite
+                        : Icons.favorite_border,
+                    color: widget.data.isFavorited
+                        ? custom_colors.pinkPrimary
+                        : Colors.white,
+                  ),
                 ),
-                Icon(
-                  Icons.pause,
-                  color: Colors.white,
-                ),
+                musicIsPaused
+                    ? GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            musicIsPaused = false;
+                            _controller.repeat();
+                          });
+                        },
+                        child: Icon(
+                          Icons.play_arrow_rounded,
+                          color: Colors.white,
+                          size: 28,
+                        ),
+                      )
+                    : GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            musicIsPaused = true;
+                            _controller.stop();
+                          });
+                        },
+                        child: Icon(
+                          Icons.pause,
+                          color: Colors.white,
+                          size: 28,
+                        ),
+                      )
               ],
             ),
           ),

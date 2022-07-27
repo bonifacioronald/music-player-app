@@ -77,8 +77,8 @@ class MainMenuScreen extends StatelessWidget {
                   text: 'Playlist',
                 ),
                 GButton(
-                  icon: Icons.favorite,
-                  text: 'Favorite',
+                  icon: Icons.account_circle_rounded,
+                  text: 'Account',
                 ),
               ],
             ),
