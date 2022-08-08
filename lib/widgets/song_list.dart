@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:music_player_app/providers/songs_provider.dart';
-import 'package:music_player_app/widgets/song_list_tile_item.dart';
 import 'package:provider/provider.dart';
-import 'package:music_player_app/models/song.dart';
+
 import '../models/colors.dart' as custom_colors;
+import '../providers/songs_provider.dart';
+import '../widgets/song_list_tile_item.dart';
+import '../models/song.dart';
 
 class SongList extends StatefulWidget {
   @override
@@ -51,7 +52,7 @@ class _SongListState extends State<SongList> {
                                   : custom_colors.pinkPrimary,
                               borderRadius: BorderRadius.circular(4)),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           width: 6,
                         ),
                         Text(
@@ -67,7 +68,7 @@ class _SongListState extends State<SongList> {
                       ],
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 32,
                   ),
                   GestureDetector(
@@ -89,7 +90,7 @@ class _SongListState extends State<SongList> {
                                   : Colors.transparent,
                               borderRadius: BorderRadius.circular(4)),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           width: 6,
                         ),
                         Text(
@@ -113,7 +114,7 @@ class _SongListState extends State<SongList> {
         Expanded(
           flex: 6,
           child: Padding(
-            padding: EdgeInsets.only(right: 20.0, left: 8),
+            padding: const EdgeInsets.only(right: 20.0, left: 8),
             child: ListView.builder(
               itemCount: isShowingRecent
                   ? songsData.length

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:music_player_app/models/song.dart';
 import '../models/colors.dart' as custom_colors;
+import '../models/song.dart';
 
 class MainMenuSongPlayer extends StatefulWidget {
   Song data;
 
-  MainMenuSongPlayer(this.data);
+  MainMenuSongPlayer(this.data, {Key? key}) : super(key: key);
 
   @override
   State<MainMenuSongPlayer> createState() => _MainMenuSongPlayerState();
@@ -35,7 +35,7 @@ class _MainMenuSongPlayerState extends State<MainMenuSongPlayer>
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 20),
+      padding: const EdgeInsets.symmetric(horizontal: 20),
       width: double.infinity,
       height: 80,
       decoration: const BoxDecoration(
@@ -61,8 +61,11 @@ class _MainMenuSongPlayerState extends State<MainMenuSongPlayer>
           ),
           title: Text(
             widget.data.title,
-            style: TextStyle(
-                color: Colors.white, fontWeight: FontWeight.bold, fontSize: 16),
+            style: const TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+              fontSize: 16,
+            ),
           ),
           subtitle: Text(
             widget.data.artist,
@@ -98,7 +101,7 @@ class _MainMenuSongPlayerState extends State<MainMenuSongPlayer>
                             _controller.repeat();
                           });
                         },
-                        child: Icon(
+                        child: const Icon(
                           Icons.play_arrow_rounded,
                           color: Colors.white,
                           size: 28,
@@ -111,7 +114,7 @@ class _MainMenuSongPlayerState extends State<MainMenuSongPlayer>
                             _controller.stop();
                           });
                         },
-                        child: Icon(
+                        child: const Icon(
                           Icons.pause,
                           color: Colors.white,
                           size: 28,

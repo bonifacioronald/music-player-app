@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:music_player_app/providers/playlists_provider.dart';
-import 'package:music_player_app/providers/songs_provider.dart';
 import 'package:provider/provider.dart';
 
-import './screens/main_menu_screen.dart';
+import 'providers/playlists_provider.dart';
+import 'providers/songs_provider.dart';
+import 'screens/main_menu_screen.dart';
 
 void main() {
   runApp(const MyApp());

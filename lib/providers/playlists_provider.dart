@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:music_player_app/models/playlist.dart';
+import '../models/playlist.dart';
 
 class PlaylistsProvider with ChangeNotifier {
   List<Playlist> playlistsProviderList = [

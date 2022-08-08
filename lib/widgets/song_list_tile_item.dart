@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:music_player_app/models/song.dart';
-import '../models/colors.dart' as custom_colors;
+import '../models/song.dart';
 
 class SongListTile extends StatelessWidget {
   Song data;
 
-  SongListTile(this.data);
+  SongListTile(this.data, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +22,7 @@ class SongListTile extends StatelessWidget {
       ),
       title: Text(
         data.title,
-        style: TextStyle(
+        style: const TextStyle(
           fontSize: 16,
           fontWeight: FontWeight.bold,
           color: Colors.black,
@@ -31,14 +30,14 @@ class SongListTile extends StatelessWidget {
       ),
       subtitle: Text(
         data.artist,
-        style: TextStyle(
+        style: const TextStyle(
           fontSize: 14,
           color: Colors.black54,
         ),
       ),
       trailing: Text(
         data.duration,
-        style: TextStyle(
+        style: const TextStyle(
           fontSize: 14,
           color: Colors.black54,
         ),

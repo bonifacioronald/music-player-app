@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:music_player_app/models/song.dart';
+import '../models/song.dart';
 
 class SongsProvider with ChangeNotifier {
   List<Song> songsProviderList = [

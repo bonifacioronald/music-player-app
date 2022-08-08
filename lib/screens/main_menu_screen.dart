@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
-import 'package:music_player_app/models/song.dart';
-import 'package:music_player_app/providers/playlists_provider.dart';
-import 'package:music_player_app/providers/songs_provider.dart';
-import 'package:music_player_app/widgets/main_menu_song_player.dart';
-import 'package:music_player_app/widgets/playlist_card.dart';
-import 'package:music_player_app/widgets/song_list.dart';
-import 'package:music_player_app/widgets/song_list_tile_item.dart';
 import 'package:provider/provider.dart';
-import 'package:music_player_app/models/playlist.dart';
+
 import '../models/colors.dart' as custom_colors;
+import '../models/song.dart';
+import '../providers/playlists_provider.dart';
+import '../providers/songs_provider.dart';
+import '../widgets/main_menu_song_player.dart';
+import '../widgets/playlist_card.dart';
+import '../widgets/song_list.dart';
+import '../models/playlist.dart';
 
 class MainMenuScreen extends StatelessWidget {
   const MainMenuScreen({Key? key}) : super(key: key);
@@ -26,7 +26,7 @@ class MainMenuScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: custom_colors.pinkPrimary,
         elevation: 0,
-        title: Text(
+        title: const Text(
           'Discover',
           style: TextStyle(
               fontSize: 28,
@@ -37,7 +37,7 @@ class MainMenuScreen extends StatelessWidget {
         actions: [
           IconButton(
               onPressed: () {},
-              icon: Icon(
+              icon: const Icon(
                 Icons.menu,
                 color: Colors.white,
               ))
@@ -52,8 +52,8 @@ class MainMenuScreen extends StatelessWidget {
           ),
           Container(
             height: 80,
-            padding: EdgeInsets.symmetric(horizontal: 20),
-            decoration: BoxDecoration(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            decoration: const BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(20),
@@ -63,7 +63,7 @@ class MainMenuScreen extends StatelessWidget {
               activeColor: custom_colors.pinkPrimary,
               padding: EdgeInsets.zero,
               gap: 12,
-              tabs: [
+              tabs: const [
                 GButton(
                   icon: Icons.home,
                   text: 'Home',
@@ -100,7 +100,7 @@ class MainMenuScreen extends StatelessWidget {
                       width: double.infinity,
                       decoration: BoxDecoration(
                           color: custom_colors.pinkPrimary,
-                          borderRadius: BorderRadius.only(
+                          borderRadius: const BorderRadius.only(
                               bottomLeft: Radius.circular(40))),
                     ),
 
@@ -140,23 +140,25 @@ class MainMenuScreen extends StatelessWidget {
                                 ),
                               )),
                           Expanded(
-                              flex: 6,
-                              child: Padding(
-                                padding: const EdgeInsets.only(left: 8.0),
-                                child: ListView.builder(
-                                    scrollDirection: Axis.horizontal,
-                                    itemCount: playlistsData.length,
-                                    itemBuilder: (_, index) {
-                                      return PlaylistCard(playlistsData[index]);
-                                    }),
-                              ))
+                            flex: 6,
+                            child: Padding(
+                              padding: const EdgeInsets.only(left: 8.0),
+                              child: ListView.builder(
+                                scrollDirection: Axis.horizontal,
+                                itemCount: playlistsData.length,
+                                itemBuilder: (_, index) {
+                                  return PlaylistCard(playlistsData[index]);
+                                },
+                              ),
+                            ),
+                          ),
                         ],
                       ),
                     )
                   ],
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 32,
               ),
               Expanded(
@@ -173,72 +175,3 @@ class MainMenuScreen extends StatelessWidget {
     );
   }
 }
-
-// class SongList extends StatelessWidget {
-//   const SongList({
-//     Key? key,
-//     required this.songsData,
-//   }) : super(key: key);
-
-//   final List<Song> songsData;
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Row(
-//       children: [
-//         Expanded(
-//           flex: 1,
-//           child: Padding(
-//             padding: const EdgeInsets.only(left: 20.0),
-//             child: RotatedBox(
-//               quarterTurns: -1,
-//               child: Row(
-//                 mainAxisAlignment: MainAxisAlignment.end,
-//                 crossAxisAlignment: CrossAxisAlignment.start,
-//                 children: const [
-//                   Text(
-//                     'Liked',
-//                     style: TextStyle(
-//                         fontSize: 16,
-//                         color: Colors.black54,
-//                         fontWeight: FontWeight.bold),
-//                   ),
-//                   SizedBox(
-//                     width: 40,
-//                   ),
-//                   Text(
-//                     'Recent',
-//                     style: TextStyle(
-//                         fontSize: 16,
-//                         color: Colors.black,
-//                         fontWeight: FontWeight.bold),
-//                   ),
-//                 ],
-//               ),
-//             ),
-//           ),
-//         ),
-//         Expanded(
-//           flex: 6,
-//           child: Padding(
-//             padding: EdgeInsets.only(right: 20.0, left: 8),
-//             child: ListView.builder(
-//               itemCount: songsData.length,
-//               itemBuilder: (_, index) {
-//                 return Column(
-//                   children: [
-//                     SongListTile(songsData[index]),
-//                     SizedBox(
-//                       height:
-//                           index == songsData.length - 1 ? 100 : 0,
-//                     )
-//                   ],
-//                 );
-//               },
-//             ),
-//           ),
-//         )
-//       ],
-//     );
-//   }
-// }
