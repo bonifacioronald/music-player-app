@@ -29,7 +29,6 @@ class MyApp extends StatelessWidget {
         theme:
             ThemeData(fontFamily: 'Hyperspacerace', accentColor: Colors.white),
         home: MainMenuScreen(),
-        routes: {},
       ),
     );
   }
